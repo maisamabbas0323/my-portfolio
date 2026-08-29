@@ -68,8 +68,8 @@ Something modern in your terminal: Node.js and npm.
 
 ```bash
 # clone the repository
-git clone https://github.com/maisamabbas0323/Maisam-Portfolio.git
-cd Maisam-Portfolio
+git clone https://github.com/maisamabbas0323/my-portfolio.git
+cd my-portfolio
 
 # install dependencies
 npm install
