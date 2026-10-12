@@ -8,7 +8,9 @@ the education, the certificates, the live GitHub archive, the actual résumé. N
 placeholder copy, and nothing pretends to be better than it is.
 
 Explore it at the source: [github.com/maisamabbas0323](https://github.com/maisamabbas0323)
+
 Live : https://my-portfolio-blond-ten-17.vercel.app/
+
 ---
 
 ## About this project
