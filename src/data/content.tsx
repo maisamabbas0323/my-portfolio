@@ -13,7 +13,6 @@ import {
   IconCpu,
   IconDatabase,
   IconDiamond,
-  IconFacebook,
   IconFlag,
   IconFolder,
   IconGitBranch,
@@ -23,7 +22,6 @@ import {
   IconHexagon,
   IconHome,
   IconAbout,
-  IconInstagram,
   IconKey,
   IconKanban,
   IconLayers,
@@ -44,12 +42,8 @@ import {
   IconSmartphone,
   IconSliders,
   IconTerminal,
-  IconTikTok,
   IconUsers,
-  IconWhatsApp,
   IconWind,
-  IconX,
-  IconYouTube,
   IconZap,
 } from '../components/icons';
 
@@ -65,9 +59,8 @@ export const SITE = {
   location: 'Parachinar, Pakistan',
   github: 'https://github.com/maisamabbas0323',
   githubUser: 'maisamabbas0323',
-  resumeUrl:
-    'https://drive.google.com/file/d/1Z2j7pepU7lpUokWKGW6p1RTEKbbtf0lo/view?usp=drive_link',
-  resumeId: '1Z2j7pepU7lpUokWKGW6p1RTEKbbtf0lo',
+  resumeUrl: 'https://drive.google.com/file/d/1yCR8IY0tCsmwa1XLVif4W3ScSKamyLS6/view?usp=drive_link',
+  resumeId: '1yCR8IY0tCsmwa1XLVif4W3ScSKamyLS6',
 } as const;
 
 /* ------------------------------------------------------------------ */
@@ -97,48 +90,12 @@ export const SOCIALS: Social[] = [
     icon: IconLinkedIn,
     delay: '-0.6s',
   },
-  { id: 'x', name: 'X', url: 'http://x.com/maisamabbas0323', icon: IconX, delay: '-1.2s' },
-  {
-    id: 'youtube',
-    name: 'YouTube',
-    url: 'http://www.youtube.com/@MesamBuilds',
-    icon: IconYouTube,
-    delay: '-1.8s',
-  },
-  {
-    id: 'instagram',
-    name: 'Instagram',
-    url: 'https://instagram.com/maisamabbas0323',
-    icon: IconInstagram,
-    delay: '-2.4s',
-  },
-  {
-    id: 'tiktok',
-    name: 'TikTok',
-    url: 'https://www.tiktok.com/@maisamabbas0323',
-    icon: IconTikTok,
-    delay: '-3s',
-  },
-  {
-    id: 'facebook',
-    name: 'Facebook',
-    url: 'https://www.facebook.com/share/1ELBAW1EAM/',
-    icon: IconFacebook,
-    delay: '-3.6s',
-  },
-  {
-    id: 'whatsapp',
-    name: 'WhatsApp',
-    url: 'http://wa.me/923238895337',
-    icon: IconWhatsApp,
-    delay: '-4.2s',
-  },
   {
     id: 'email',
     name: 'Email',
     url: 'mailto:maisamabbas0323@gmail.com',
     icon: IconMail,
-    delay: '-4.8s',
+    delay: '-1.2s',
   },
 ];
 
@@ -185,7 +142,6 @@ export type EducationItem = {
   grade: string;
   gradeTone: 'accent' | 'soft';
   icon: ComponentType<IconProps>;
-  docs: { label: string; href: string }[];
 };
 
 export const EDUCATION: EducationItem[] = [
@@ -200,16 +156,6 @@ export const EDUCATION: EducationItem[] = [
     grade: 'A-1',
     gradeTone: 'accent',
     icon: IconBook,
-    docs: [
-      {
-        label: 'View DMC',
-        href: 'https://drive.google.com/file/d/12b_VBwbkhlNsxgU8bZ9kVlGTrcBz2tDn/view?usp=drive_link',
-      },
-      {
-        label: 'View Certificate',
-        href: 'https://drive.google.com/file/d/1wT1K1-nbLvyvTWiDtOc_HWejuUOkO9TK/view?usp=drive_link',
-      },
-    ],
   },
   {
     id: 'fsc',
@@ -222,16 +168,6 @@ export const EDUCATION: EducationItem[] = [
     grade: 'A',
     gradeTone: 'soft',
     icon: IconGradCap,
-    docs: [
-      {
-        label: 'View DMC',
-        href: 'https://drive.google.com/file/d/1lUj5fQGqSlbV27OEhobmhtmmg-3q8fKi/view?usp=drive_link',
-      },
-      {
-        label: 'View Certificate',
-        href: 'https://drive.google.com/file/d/1ycnmxuYKyZGRkWPZT3by5Zivz5OC8oST/view?usp=drive_link',
-      },
-    ],
   },
 ];
 

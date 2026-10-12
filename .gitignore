@@ -1,5 +1,8 @@
 node_modules
 dist
+.agents/
+.claude/
+skills-lock.json
 dist-ssr
 *.local
 .DS_Store

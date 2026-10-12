@@ -83,7 +83,7 @@ function Spotlight({ repo }: { repo: GitHubRepo }) {
   return (
     <Reveal>
       <article className="repo-spot">
-        <span className="repo-spot__tag">Latest push</span>
+        <span className="repo-spot__tag">Most recent</span>
         <div>
           <h3 className="repo-card__name" style={{ marginBottom: 10 }}>
             <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
@@ -108,7 +108,7 @@ function Spotlight({ repo }: { repo: GitHubRepo }) {
             <span>
               <IconFork size={13} /> {compact(repo.forks_count)}
             </span>
-            <span>sync {timeAgo(repo.updated_at)}</span>
+            <span>updated {timeAgo(repo.updated_at)}</span>
           </div>
         </div>
         <a
@@ -149,10 +149,10 @@ export function Works() {
           eyebrow="Works"
           title={
             <>
-              The live <em>engineering archive</em>
+              A look at what <em>I've been building</em>
             </>
           }
-          sub="Everything here is fetched in real time from my GitHub profile. New public repositories appear here automatically — no manual updates."
+          sub="These are my public repositories on GitHub, pulled in as you open this page — so the list stays current without me touching it."
         />
 
         <div className="works__toolbar">
@@ -160,15 +160,14 @@ export function Works() {
             <IconSearch size={16} />
             <input
               type="search"
-              placeholder="Filter by name, description, or language…"
+              placeholder="Search my projects…"
               aria-label="Filter repositories"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
           </div>
-          <span className="works__live">
-            <span className="dot" aria-hidden="true" />
-            live from{' '}
+          <span className="works__source mono">
+            straight from{' '}
             <a href={SITE.github} target="_blank" rel="noopener noreferrer">
               {SITE.githubUser}
             </a>

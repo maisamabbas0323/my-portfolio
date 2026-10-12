@@ -19,7 +19,6 @@ export function Home({ onNavigate }: HomeProps) {
             <div className="hero__content">
               <Reveal>
                 <p className="hero__topline">
-                  <span className="dot dot--accent" aria-hidden="true" />
                   Portfolio <b>© 2026</b> — Software Engineer
                 </p>
               </Reveal>
@@ -94,7 +93,8 @@ export function Home({ onNavigate }: HomeProps) {
             onClick={scrollTo('about')}
             aria-label="Continue to About"
           >
-            <IconChevronDown size={18} />
+            Scroll
+            <IconChevronDown size={16} />
           </button>
         </Reveal>
       </div>

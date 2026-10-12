@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { NavRibbon } from './components/NavRibbon';
+import { TopNav } from './components/TopNav';
 import { Footer } from './components/Footer';
 import { Home } from './sections/Home';
 import { About } from './sections/About';
@@ -36,7 +36,7 @@ export default function App() {
 
   return (
     <div className="shell">
-      <NavRibbon active={active} onNavigate={navigate} />
+      <TopNav active={active} onNavigate={navigate} />
 
       <div className="shell__inner">
         <main>

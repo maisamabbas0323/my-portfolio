@@ -4,7 +4,6 @@ import {
   IconGitHub,
   IconMail,
   IconLinkedIn,
-  IconX,
 } from './icons';
 import { NAV_ITEMS, SITE, type SectionId } from '../data/content';
 
@@ -23,21 +22,7 @@ export function Footer({ onNavigate }: FooterProps) {
             <Reveal>
               <div className="footer__mono">
                 <span className="footer__logo" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
-                    <path
-                      d="M9 22 16 11l7 11"
-                      stroke="currentColor"
-                      strokeWidth="2.4"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M12 17.5h8"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
+                  MA
                 </span>
                 <span>
                   <strong className="mono" style={{ color: 'var(--text-1)', fontSize: 13.5 }}>
@@ -91,9 +76,6 @@ export function Footer({ onNavigate }: FooterProps) {
                 aria-label="LinkedIn"
               >
                 <IconLinkedIn size={17} />
-              </a>
-              <a href="http://x.com/maisamabbas0323" target="_blank" rel="noopener noreferrer" title="X" aria-label="X">
-                <IconX size={16} />
               </a>
               <a href={`mailto:${SITE.email}`} title="Email" aria-label="Email">
                 <IconMail size={18} />

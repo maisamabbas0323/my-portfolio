@@ -1,6 +1,5 @@
 import { Reveal } from '../components/Reveal';
 import { SectionHead } from '../components/SectionHead';
-import { IconExternalLink } from '../components/icons';
 import { EDUCATION, percentage } from '../data/content';
 
 export function Education() {
@@ -64,20 +63,7 @@ export function Education() {
                       </div>
                     </div>
 
-                    <div className="edu-card__docs">
-                      {item.docs.map((doc) => (
-                        <a
-                          key={doc.label}
-                          className="btn btn--ghost btn--small"
-                          href={doc.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <IconExternalLink size={14} />
-                          {doc.label}
-                        </a>
-                      ))}
-                    </div>
+
                   </div>
                 </Reveal>
               </div>
