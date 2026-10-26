@@ -504,6 +504,18 @@ export const IconSlash = (p: IconProps) => (
   </Svg>
 );
 
+export const MenuIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M4 7h16M4 12h16M4 17h16" />
+  </Svg>
+);
+
+export const CloseIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="m5.5 5.5 13 13M18.5 5.5l-13 13" />
+  </Svg>
+);
+
 export const IconBook = (p: IconProps) => (
   <Svg {...p}>
     <path d="M3.5 5.2A2.4 2.4 0 0 1 5.9 2.8h3.4V18.4H5.9A2.4 2.4 0 0 0 3.5 20.8V5.2Z" />

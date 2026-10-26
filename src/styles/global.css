@@ -386,12 +386,20 @@ p {
   left: 0;
   right: 0;
   z-index: 80;
+  padding-top: env(safe-area-inset-top);
   backdrop-filter: blur(20px) saturate(1.15);
   -webkit-backdrop-filter: blur(20px) saturate(1.15);
   background: rgba(9, 9, 11, 0.82);
   border-bottom: 1px solid transparent;
   box-shadow: none;
-  transition: background 0.35s var(--ease), border-color 0.35s var(--ease);
+  transition: background 0.35s var(--ease), border-color 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+}
+
+/* scrolled state — subtle depth so the bar separates from content */
+.topnav--scrolled {
+  background: rgba(9, 9, 11, 0.92);
+  box-shadow: 0 8px 32px -16px rgba(0, 0, 0, 0.6);
 }
 
 .topnav::after {
@@ -411,7 +419,7 @@ p {
   align-items: center;
   justify-content: center;
   gap: clamp(20px, 4vw, 48px);
-  padding-block: clamp(12px, 1.5vw, 16px);
+  padding-block: clamp(10px, 1.5vw, 16px);
 }
 
 .topnav__brand {
@@ -460,6 +468,27 @@ p {
   min-height: 36px;
 }
 
+/* animated underline on hover (desktop) */
+.topnav__link::after {
+  content: '';
+  position: absolute;
+  left: clamp(12px, 1.8vw, 16px);
+  right: clamp(12px, 1.8vw, 16px);
+  bottom: 4px;
+  height: 1px;
+  background: var(--accent);
+  border-radius: 999px;
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0;
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+
+.topnav__link:hover::after {
+  transform: scaleX(1);
+  opacity: 0.65;
+}
+
 .topnav__link:hover {
   color: var(--text-1);
   background: rgba(255, 255, 255, 0.05);
@@ -472,18 +501,138 @@ p {
   box-shadow: none;
 }
 
+.topnav__link--active::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
 
+/* ---------- mobile menu toggle (hidden on desktop) ---------- */
 
+.topnav__menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-1);
+  cursor: pointer;
+  transition: background 0.28s var(--ease), border-color 0.28s var(--ease);
+}
 
-@media (max-width: 640px) {
+.topnav__menu-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--accent-line);
+}
+
+.topnav__menu-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- mobile dropdown menu ---------- */
+
+  .topnav__mobile {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 14px calc(14px + env(safe-area-inset-bottom));
+  background: rgba(11, 11, 14, 0.97);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  border-bottom: 1px solid var(--line-2);
+  box-shadow: var(--shadow-2);
+}
+
+.topnav--menu-open .topnav__mobile {
+  display: flex;
+}
+
+.topnav__mobile-link {
+  display: flex;
+  align-items: center;
+  min-height: 46px; /* comfortable 44px+ touch target */
+  padding: 0 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-2);
+  transition: color 0.25s var(--ease), background 0.25s var(--ease);
+}
+
+.topnav__mobile-link:hover {
+  color: var(--text-1);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.topnav__mobile-link--active {
+  color: var(--text-1);
+  background: var(--accent-dim);
+  box-shadow: inset 0 0 0 1px var(--accent-line);
+}
+
+/* ==========================================================
+   Responsive — navigation
+   ========================================================== */
+
+/* small tablets / large phones: tighten the inline links */
+@media (max-width: 760px) {
   .topnav__links {
     gap: 2px;
     padding: 4px 6px;
+    transform: none;
   }
 
   .topnav__link {
     padding: 6px 9px;
-    font-size: 12.5px;
+    font-size: 13px;
+  }
+
+  .topnav__link::after {
+    display: none;
+  }
+}
+
+/* phones: swap inline links for the hamburger + dropdown */
+@media (max-width: 640px) {
+  .topnav__links {
+    display: none;
+  }
+
+  .topnav__inner {
+    justify-content: space-between;
+    padding-block: 10px;
+  }
+
+  .topnav__menu-btn {
+    display: inline-flex;
+  }
+
+  .topnav::after {
+    width: 100%;
+  }
+
+  /* animate the dropdown without JS animation libs */
+  .topnav--menu-open::after {
+    opacity: 0;
+  }
+}
+
+/* tablet (641–1079px): keep inline links, drop the bottom bar to avoid
+   double navigation clutter */
+@media (min-width: 641px) {
+  .bottomnav {
+    display: none !important;
+  }
+
+  body {
+    padding-bottom: 0;
   }
 }
 
@@ -2117,6 +2266,250 @@ p {
   text-transform: uppercase;
   color: var(--text-3);
 }
+
+/* ==========================================================
+   Mobile & interaction ultra-polish
+   (touch-first layer — applies on phones, harmonizes on desktop)
+   ========================================================== */
+
+/* kill the 300ms tap delay & double-tap zoom on all controls */
+.btn,
+.topnav__menu-btn,
+.topnav__link,
+.topnav__mobile-link,
+.bottomnav__item,
+.skills__cat,
+.soc,
+.ach-card__view,
+.repo-card__open,
+.footer__links a,
+.footer__social a,
+.about__contact a,
+.scroll-hint {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* press feedback for touch devices (no hover there) */
+@media (hover: none) {
+  .btn:active,
+  .soc:active,
+  .ach-card__view:active,
+  .footer__social a:active,
+  .topnav__menu-btn:active,
+  .skills__cat:active {
+    transform: scale(0.97);
+    transition-duration: 0.12s;
+  }
+
+  .bottomnav__item:active {
+    transform: scale(0.94);
+    transition-duration: 0.12s;
+  }
+
+  .topnav__link:active,
+  .topnav__mobile-link:active {
+    background: rgba(217, 184, 120, 0.12);
+  }
+
+  /* cards respond to touch instead of float */
+  .ach-card:active,
+  .repo-card:active,
+  .edu-card:active {
+    transform: scale(0.99);
+    border-color: var(--accent-line);
+  }
+}
+
+/* ---------- phones (≤640px) ---------- */
+@media (max-width: 640px) {
+  /* reclaim vertical rhythm — sections breathe less on small screens */
+  .section {
+    padding-block: clamp(64px, 15vw, 96px);
+  }
+
+  /* fixed nav breathing room + anchor landing offset */
+  .section,
+ [id] {
+    scroll-margin-top: 76px;
+  }
+
+  /* CTAs become confident, full-width thumb targets */
+  .hero__cta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .hero__cta .btn {
+    width: 100%;
+    min-height: 48px;
+    font-size: 15px;
+  }
+
+  /* works toolbar stacks search + source cleanly */
+  .works__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search {
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+    font-size: 16px; /* stops iOS auto-zoom on focus */
+  }
+
+  .search input {
+    font-size: 16px;
+  }
+
+  .works__source {
+    justify-content: flex-start;
+    font-size: 12px;
+  }
+
+  /* featured repo card breathes better */
+  .repo-spot {
+    gap: 16px;
+    padding: 20px 18px;
+  }
+
+  /* achievements: wide card becomes a natural vertical story */
+  .ach-card--wide .ach-card__group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .ach-card__view {
+    justify-content: center;
+    min-height: 44px;
+    width: 100%;
+  }
+
+  /* skills side-list converts to a scrollable chip rail:
+     auto-scroll active chip into view position */
+  .skills__panel {
+    min-height: 0;
+  }
+
+  /* education: node dots align with card corner on tight screens */
+  .timeline__node {
+    box-shadow: 0 0 0 5px var(--accent-dim);
+  }
+
+  /* footer: link rows become roomy thumb lists */
+  .footer__links a {
+    min-height: 40px;
+  }
+
+  .footer__social a {
+    width: 44px;
+    height: 44px;
+  }
+
+  .about__contact a {
+    display: inline-block;
+    padding: 4px 0;
+  }
+
+  /* stat strips / meta rows wrap without orphaning words */
+  .section__meta,
+  .stat-strip,
+  .ach-card__meta,
+  .edu-card__meta {
+    row-gap: 8px;
+  }
+
+  /* resume actions: full-width, stacked, thumb friendly */
+  .resume__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .resume__actions .btn {
+    min-height: 48px;
+  }
+}
+
+/* very narrow phones (≤380px) — tighten type without breaking scale */
+@media (max-width: 380px) {
+  .hero__topline {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__name {
+    font-size: clamp(2.2rem, 12vw, 2.55rem);
+  }
+
+  .marks-cell {
+    padding: 10px 5px;
+  }
+
+  .marks-cell__label {
+    letter-spacing: 0.04em;
+  }
+}
+
+/* landscape phones — keep bottom nav from eating the viewport */
+@media (max-width: 640px) and (orientation: landscape) {
+  .bottomnav {
+    width: min(calc(100% - 16px), 520px);
+  }
+
+  body {
+    padding-bottom: 72px;
+  }
+}
+
+/* ---------- hover-only upgrades (pointer devices) ---------- */
+@media (hover: hover) and (pointer: fine) {
+  /* refined card lift for precise pointers */
+  .repo-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .skill-node:hover {
+    transform: translateX(4px);
+  }
+
+  .edu-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* ---------- mobile menu entrance ---------- */
+
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.topnav--menu-open .topnav__mobile {
+  animation: menuIn 0.28s var(--spring);
+}
+
+.topnav--menu-open .topnav__mobile-link {
+  opacity: 0;
+  animation: menuIn 0.32s var(--spring) forwards;
+}
+
+.topnav--menu-open .topnav__mobile-link:nth-child(1) { animation-delay: 0.02s; }
+.topnav--menu-open .topnav__mobile-link:nth-child(2) { animation-delay: 0.05s; }
+.topnav--menu-open .topnav__mobile-link:nth-child(3) { animation-delay: 0.08s; }
+.topnav--menu-open .topnav__mobile-link:nth-child(4) { animation-delay: 0.11s; }
+.topnav--menu-open .topnav__mobile-link:nth-child(5) { animation-delay: 0.14s; }
+.topnav--menu-open .topnav__mobile-link:nth-child(6) { animation-delay: 0.17s; }
+.topnav--menu-open .topnav__mobile-link:nth-child(7) { animation-delay: 0.2s; }
 
 /* ==========================================================
    Reduced motion
